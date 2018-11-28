@@ -21,6 +21,7 @@ public class MainMenu extends AppCompatActivity {
     }
 
     public void openTrivia(View v){
+
         startActivity(new Intent(MainMenu.this, MainActivity.class));
     }
 }
