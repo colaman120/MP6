@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Trivia App</string>
+    <string name="app_name">Trivia HQ</string>
+    <string name="select_Category">Select Category</string>
+    <string name="diff">Select Difficulty</string>
+    <string name="play">Let\'s Play!</string>
+    <string name="fin">Final Answer</string>
 </resources>
