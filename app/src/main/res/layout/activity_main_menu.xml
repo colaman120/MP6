@@ -29,6 +29,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="16dp"
         android:background="@android:color/holo_red_light"
+        android:entries="@array/categories"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,6 +41,7 @@
         android:layout_height="44dp"
         android:layout_marginTop="20dp"
         android:background="@android:color/holo_red_light"
+        android:entries="@array/difficulty"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
