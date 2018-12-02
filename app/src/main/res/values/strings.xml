@@ -8,4 +8,5 @@
     <string name="dif">Difficulty: </string>
     <string name="label_submit_button">Submit</string>
     <string name="label_skip_button">Skip</string>
+    <string name="nextMyButton">Continue</string>
 </resources>

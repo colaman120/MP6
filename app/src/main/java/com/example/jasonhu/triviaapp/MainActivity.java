@@ -65,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
      * changes skip button to next button, stores selected value
      */
     protected void onOptionClick() {
-
+        Button myButton = (Button) findViewById(R.id.myButton);
+        myButton.setText(getString(R.string.nextMyButton));
     }
 
 
