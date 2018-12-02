@@ -14,6 +14,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private List<QGroup> groups;
+    private List<Integer> optionIDs;
     private int pos;
     private int qListSize;
     private int cOption;
@@ -28,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Construction Zone
+
+        //initialize the list of option IDs
+        optionIDs.add(R.id.zero);
+        optionIDs.add(R.id.one);
+        optionIDs.add(R.id.two);
+        optionIDs.add(R.id.three);
     }
 
     protected void nextQ() {
@@ -35,15 +42,22 @@ public class MainActivity extends AppCompatActivity {
         selOption = 0;
         //set Q, options,
         //resetlist
-        resetButton(R.id.one);
-        resetButton(R.id.two);
-        resetButton(R.id.three);
-        resetButton(R.id.four);
+        int correctPos = (int) (Math.random()*4.0);
+        int currentPos = 0;
+        for ()
+//        if (currentPos == correctPos) {
+//            setButton(R.id.one, groups.get(pos).getCorrectOption(), 0);
+//        } else {
+//            setButton(R.id.one, groups.get(pos).getIncorrectOption(currentPos), 0);
+//            currentPos++;
+//        }
+        pos++;
     }
-    protected void resetButton(int id) {
-        RadioButton myButton = findViewById(id);
-        myButton.setEnabled(true);
-        myButton.setHighlightColor(0);
+    protected void setButton(int id, String text, int colour) {
+//        RadioButton myButton = findViewById(id);
+//        myButton.setText(text);
+//        myButton.setEnabled(true);
+//        myButton.setHighlightColor(colour);
     }
 
     /**

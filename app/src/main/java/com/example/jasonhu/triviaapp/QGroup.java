@@ -22,8 +22,8 @@ public class QGroup {
         return correctOption;
     }
 
-    public List<String> getIncorrectOptions() {
-        return incorrectOptions;
+    public String getIncorrectOption(int i) {
+        return incorrectOptions.get(i);
     }
 
     public void add(String inCorrectOption) {

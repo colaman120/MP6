@@ -66,6 +66,12 @@
         android:layout_above="@+id/myButton">
 
         <RadioButton
+            android:id="@+id/zero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <RadioButton
             android:id="@+id/one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,12 +85,6 @@
 
         <RadioButton
             android:id="@+id/three"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-        <RadioButton
-            android:id="@+id/four"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="" />
