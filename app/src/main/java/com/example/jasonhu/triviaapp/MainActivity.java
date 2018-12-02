@@ -2,10 +2,20 @@ package com.example.jasonhu.triviaapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private List<QGroup> groups;
+    private int pos;
+    private int qListSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +29,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void nextQ() {
+        QGroup group = groups.get(pos);
+        //set Q, options,
+        //resetlist
+        int colour = 0;
+        RadioButton myButton = (RadioButton) findViewById(R.id.one);
+        myButton.setEnabled(true);
+        myButton.setHighlightColor(colour);
+        myButton = (RadioButton) findViewById(R.id.two);
+        myButton.setEnabled(true);
+        myButton.setHighlightColor(colour);
+        myButton = (RadioButton) findViewById(R.id.three);
+        myButton.setEnabled(true);
+        myButton.setHighlightColor(colour);
+        myButton = (RadioButton) findViewById(R.id.four);
+        myButton.setEnabled(true);
+        myButton.setHighlightColor(colour);
+    }
+
+    /**
+     * get selected,
+     * if none selected, increment skip, call nextQ
+     * if selected is correct, toast correct, color correct, increment correctcounter, change button
+     *  to next
+     * if incorrect, toast incorrect, color incorrect, increment counter, change button to skip
+     * @param view
+     */
+    protected void onSubmit(View view){
+        //get selected
+        Toast myToast = Toast.makeText(this, "Correct!",
+                Toast.LENGTH_SHORT);
+        myToast.show();
+    }
+
+    /**
+     * changes button to next button, stores selected value
+     */
+    protected void onOptionClick() {
 
     }
 
-    protected void onSubmit() {
 
-    }
-    protected void onSkip() {
-
-    }
     /*
      * Instance var list of QGroups
      * instance int pos

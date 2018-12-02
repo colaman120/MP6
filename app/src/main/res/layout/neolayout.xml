@@ -63,7 +63,7 @@
         android:id="@+id/answerChoices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/Button">
+        android:layout_above="@+id/myButton">
 
         <RadioButton
             android:id="@+id/one"
@@ -90,23 +90,10 @@
             android:text="" />
     </RadioGroup>
 
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/InnerRelativeLayout"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true" >-->
-
-        <!--<Button-->
-            <!--android:text="@string/label_submit_button"-->
-            <!--android:id="@+id/Button"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-        <!--</Button>-->
-
-    <!--</RelativeLayout>-->
     <Button
         android:text=""
-        android:id="@+id/Button"
+        android:id="@+id/myButton"
+        android:onClick="onSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
