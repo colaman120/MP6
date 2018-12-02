@@ -25,19 +25,19 @@ public class MainActivity extends AppCompatActivity {
     /**
      * current position on the question groups list
      */
-    private int qGroupsListPos;
+    private int qGroupsPos;
     /**
      * size of the question groups list
      */
-    private int groupsListSize;
+    private int qGroupsSize;
     /**
      * The postition of the correct option in the gui menu
      */
-    private int correctOption;
+    private int correctOptionPos;
     /**
      * The position of the currently selected option in the gui menu
      */
-    private int selectedOption;
+    private int selectedOptionPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +57,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void nextQ() {
+//        //If at the end of the question group list, get more and store them with api call
+//        if (qGroupsPos == qGroupsSize) {
+//          IDK, WILL FIGURE OUT LATER
+//        }
         //Get a group of questions
-        QGroup group = groups.get(pos);
+        QGroup group = groups.get(qGroupsPos);
         //randomly set the position of the correct option in the menu list
-        int correctMenuPos = (int) (Math.random()*4.0);
-        //initialize the current position of the menu list
+        correctOptionPos = (int) (Math.random()*4.0);
+        //initialize the current position of the menu list to iterate and initialize
         int currentMenuPos = 0;
-        //initialize the current position of the incorrect option list
+        //initialize the current position of the incorrect options list
         int incorrectOptionPos = 0;
         //for every option in optionIDs:
         for (int optionID : optionIDs) {
             RadioButton myButton = findViewById(optionID);
-            if (currentMenuPos == correctMenuPos) {
+            if (currentMenuPos == correctOptionPos) {
                 myButton.setText(group.getCorrectOption());
             } else {
                 myButton.setText(group.getIncorrectOption(incorrectOptionPos));
@@ -78,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             myButton.setHighlightColor(0);
             currentMenuPos++;
         }
-        qGroupsListPos++;
+        qGroupsPos++;
     }
     /**
      * if none selected, increment skip, call nextQ
