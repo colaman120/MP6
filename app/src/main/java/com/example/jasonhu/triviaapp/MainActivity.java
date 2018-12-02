@@ -35,19 +35,15 @@ public class MainActivity extends AppCompatActivity {
         selOption = 0;
         //set Q, options,
         //resetlist
-        int colour = 0;
-        RadioButton myButton = (RadioButton) findViewById(R.id.one);
+        resetButton(R.id.one);
+        resetButton(R.id.two);
+        resetButton(R.id.three);
+        resetButton(R.id.four);
+    }
+    protected void resetButton(int id) {
+        RadioButton myButton = findViewById(id);
         myButton.setEnabled(true);
-        myButton.setHighlightColor(colour);
-        myButton = (RadioButton) findViewById(R.id.two);
-        myButton.setEnabled(true);
-        myButton.setHighlightColor(colour);
-        myButton = (RadioButton) findViewById(R.id.three);
-        myButton.setEnabled(true);
-        myButton.setHighlightColor(colour);
-        myButton = (RadioButton) findViewById(R.id.four);
-        myButton.setEnabled(true);
-        myButton.setHighlightColor(colour);
+        myButton.setHighlightColor(0);
     }
 
     /**
