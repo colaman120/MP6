@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * get selected,
      * if none selected, increment skip, call nextQ
      * if selected is correct, toast correct, color correct, increment correctcounter, change button
      *  to next
@@ -56,14 +55,14 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     protected void onSubmit(View view){
-        //get selected
-        Toast myToast = Toast.makeText(this, "Correct!",
-                Toast.LENGTH_SHORT);
-        myToast.show();
+//        //get selected
+//        Toast myToast = Toast.makeText(this, "Correct!",
+//                Toast.LENGTH_SHORT);
+//        myToast.show();
     }
 
     /**
-     * changes button to next button, stores selected value
+     * changes skip button to next button, stores selected value
      */
     protected void onOptionClick() {
 
