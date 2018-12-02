@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void nextQ() {
         QGroup group = groups.get(pos);
+        selOption = 0;
         //set Q, options,
         //resetlist
         int colour = 0;
@@ -67,17 +68,12 @@ public class MainActivity extends AppCompatActivity {
      * changes skip button to next button
      */
     protected void changeMyButton() {
-        Button myButton = (Button) findViewById(R.id.myButton);
+        //id's the button
+        Button myButton = findViewById(R.id.myButton);
+        //set's the button's text to "Continue"
         myButton.setText(getString(R.string.nextMyButton));
     }
 
-    /**
-     * change button, set selOption to 0
-     */
-    protected void listClick0() {
-        selOption = 0;
-        changeMyButton();
-    }
     /**
      * change button, set selOption to 1
      */
@@ -97,6 +93,13 @@ public class MainActivity extends AppCompatActivity {
      */
     protected void listClick3() {
         selOption = 3;
+        changeMyButton();
+    }
+    /**
+     * change button, set selOption to 4
+     */
+    protected void listClick4() {
+        selOption = 4;
         changeMyButton();
     }
 
