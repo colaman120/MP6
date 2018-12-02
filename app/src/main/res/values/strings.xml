@@ -4,4 +4,8 @@
     <string name="diff">Select Difficulty</string>
     <string name="play">Let\'s Play!</string>
     <string name="fin">Final Answer</string>
+    <string name="cat">Category: </string>
+    <string name="dif">Difficulty: </string>
+    <string name="label_submit_button">Submit</string>
+    <string name="label_skip_button">Skip</string>
 </resources>
