@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private List<QGroup> groups;
     private int pos;
     private int qListSize;
+    private int cOption;
+    private int selOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +64,44 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * changes skip button to next button, stores selected value
+     * changes skip button to next button
      */
-    protected void onOptionClick() {
+    protected void changeMyButton() {
         Button myButton = (Button) findViewById(R.id.myButton);
         myButton.setText(getString(R.string.nextMyButton));
     }
 
+    /**
+     * change button, set selOption to 0
+     */
+    protected void listClick0() {
+        selOption = 0;
+        changeMyButton();
+    }
+    /**
+     * change button, set selOption to 1
+     */
+    protected void listClick1() {
+        selOption = 1;
+        changeMyButton();
+    }
+    /**
+     * change button, set selOption to 2
+     */
+    protected void listClick2() {
+        selOption = 2;
+        changeMyButton();
+    }
+    /**
+     * change button, set selOption to 3
+     */
+    protected void listClick3() {
+        selOption = 3;
+        changeMyButton();
+    }
 
     /*
+     * General idea:
      * Instance var list of QGroups
      * instance int pos
      * Instance int qlistsize
