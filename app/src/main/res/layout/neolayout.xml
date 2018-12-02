@@ -63,7 +63,7 @@
         android:id="@+id/answerChoices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/ButtonGroup">
+        android:layout_above="@+id/Button">
 
         <RadioButton
             android:id="@+id/one"
@@ -104,34 +104,12 @@
         <!--</Button>-->
 
     <!--</RelativeLayout>-->
-    <LinearLayout
+    <Button
+        android:text=""
+        android:id="@+id/Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:baselineAligned="false"
-        android:id="@+id/ButtonGroup">
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <Button
-            android:text="@string/label_submit_button"
-            android:id="@+id/SubmitButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            </Button>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <Button
-                android:text="@string/label_skip_button"
-                android:id="@+id/SkipButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </Button>
-        </RelativeLayout>
-    </LinearLayout>
+        android:layout_alignParentBottom="true">
+    </Button>
 
 </android.widget.RelativeLayout>
