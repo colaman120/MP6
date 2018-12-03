@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:padding">3dip</item>
+        <item name="android:padding">3dip</item><!--Added to enhance relative layout, remove to fix old layout-->
     </style>
 
 </resources>

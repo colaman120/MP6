@@ -2,53 +2,6 @@
 <android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/gs_top_text_container"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:paddingBottom="30dp">-->
-
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/gs_top_sub_container"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:paddingBottom="30dp">-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_l"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentLeft="true"/>-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_t"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentRight="true"/>-->
-
-        <!--</RelativeLayout>-->
-
-        <!--<RelativeLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@id/gs_top_sub_container"-->
-            <!--android:layout_centerHorizontal="true">-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text1"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"/>-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text2"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_toRightOf="@id/text1"/>-->
-
-        <!--</RelativeLayout>-->
-
     <TextView
         android:text="@string/cat"
         android:id="@+id/CatTextView"
@@ -58,16 +11,37 @@
     </TextView>
 
     <TextView
+        android:text=""
+        android:id="@+id/CatValTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/CatTextView"
+        android:layout_toEndOf="@+id/CatTextView">
+    </TextView>
+
+    <TextView
         android:text="@string/dif"
         android:id="@+id/DifTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/CatTextView">
+        android:layout_toRightOf="@+id/CatValTextView"
+        android:layout_toEndOf="@+id/CatValTextView">
     </TextView>
 
     <TextView
-        android:text="@string/qLabel"
+        android:text=""
+        android:id="@+id/DifValTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/DifTextView"
+        android:layout_toEndOf="@+id/DifTextView">
+    </TextView>
+
+    <TextView
+        android:text=""
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:id="@+id/QLabelTextView"
         android:layout_width="wrap_content"
@@ -76,7 +50,7 @@
     </TextView>
 
     <TextView
-        android:text="@string/qBody"
+        android:text=""
         android:id="@+id/QBodyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,74 +63,44 @@
         android:id="@+id/answerChoices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/ButtonGroup">
+        android:layout_above="@+id/myButton">
+
+        <RadioButton
+            android:id="@+id/zero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="listClick0"
+            android:text="" />
 
         <RadioButton
             android:id="@+id/one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Answer Choice 1" />
+            android:onClick="listClick1"
+            android:text="" />
 
         <RadioButton
             android:id="@+id/two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Answer Choice 2" />
+            android:onClick="listClick2"
+            android:text="" />
 
         <RadioButton
             android:id="@+id/three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Answer Choice 3" />
-
-        <RadioButton
-            android:id="@+id/four"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Answer Choice 3" />
+            android:onClick="listClick3"
+            android:text="" />
     </RadioGroup>
 
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/InnerRelativeLayout"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true" >-->
-
-        <!--<Button-->
-            <!--android:text="@string/label_submit_button"-->
-            <!--android:id="@+id/Button"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-        <!--</Button>-->
-
-    <!--</RelativeLayout>-->
-    <LinearLayout
+    <Button
+        android:text=""
+        android:id="@+id/myButton"
+        android:onClick="onSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/ButtonGroup">
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <Button
-            android:text="@string/label_submit_button"
-            android:id="@+id/SubmitButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            </Button>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <Button
-                android:text="@string/label_skip_button"
-                android:id="@+id/SkipButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </Button>
-        </RelativeLayout>
-    </LinearLayout>
+        android:layout_alignParentBottom="true">
+    </Button>
 
 </android.widget.RelativeLayout>
