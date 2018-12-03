@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
+<!--Looks weird because of padding defined in styles.xml, remove that line to fix-->
     <TextView
         android:id="@+id/textView"
         android:layout_width="fill_parent"
