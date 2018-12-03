@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        //Construction Zone
+        //Construction Zone Below
 
         //initialize the list of menu option IDs
         optionIDs.add(R.id.zero);
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
      * if selected is correct, toast correct, color correct, increment correctcounter, change button
      *  to next
      * if incorrect, toast incorrect, color incorrect, increment counter, change button to skip
-     * @param view
+     * @param view the current view
      */
     public void onSubmit(View view){
         //if no selected list item
@@ -176,6 +176,10 @@ public class MainActivity extends AppCompatActivity {
         selectedOptionPos = 3;
         changeMyButton();
     }
+
+    /*
+    TODO: implement api caller & parser
+     */
 
     /*
      * General idea:
