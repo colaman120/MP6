@@ -5,6 +5,7 @@ import java.util.List;
 
 public class QGroup {
 
+    private String question;
     private String correctOption;
     private List<String> incorrectOptions;
 
@@ -13,9 +14,14 @@ public class QGroup {
         incorrectOptions = new ArrayList<>();
     }
 
-    public QGroup(String correct, List<String> incorrect) {
+    public QGroup(String challenge, String correct, List<String> incorrect) {
+        question = challenge;
         correctOption = correct;
         incorrectOptions = incorrect;
+    }
+
+    public String getQuestion() {
+        return question;
     }
 
     public String getCorrectOption() {

@@ -69,24 +69,28 @@
             android:id="@+id/zero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="listClick0"
             android:text="" />
 
         <RadioButton
             android:id="@+id/one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="listClick1"
             android:text="" />
 
         <RadioButton
             android:id="@+id/two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="listClick2"
             android:text="" />
 
         <RadioButton
             android:id="@+id/three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="listClick3"
             android:text="" />
     </RadioGroup>
 

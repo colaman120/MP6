@@ -7,6 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -66,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
 //        }
         //Get a group of questions
         QGroup group = groups.get(qGroupsPos);
+        //Set the question body
+        TextView qBody = findViewById(R.id.QBodyTextView);
+        qBody.setText(group.getQuestion());
         //randomly set the position of the correct option in the menu list
         correctOptionPos = (int) (Math.random()*4.0);
         //initialize the current position of the menu list to iterate and initialize
@@ -98,25 +102,50 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     protected void onSubmit(View view){
+        //if no selected list item
         if (selectedOptionPos == -1) {
+            //increment skip counter
             skippedCouter++;
+            //move onto next question
             nextQ();
         } else if (selectedOptionPos == correctOptionPos) {
-            Toast myToast = Toast.makeText(this, "Correct!",
+            Toast myToast = Toast.makeText(this, R.string.label_correct,
                     Toast.LENGTH_SHORT);
             myToast.show();
-            Button myButton = findViewById((optionIDs.get(correctOptionPos)));
+            int currentMenuPos = 0;
+            for (int optionID : optionIDs) {
+                RadioButton radioButton = findViewById(optionID);
+                if (currentMenuPos == correctOptionPos) {
+                    radioButton.setHighlightColor(/*whatever green is*/0);
+                }
+                radioButton.setEnabled(false);
+                currentMenuPos++;
+            }
+            //id's submit button
+            Button myButton = findViewById(R.id.myButton);
+            //set's the button's text to "Continue"
+            myButton.setText(getString(R.string.label_continue_button));
+            correctCounter++;
+        } else {
+            Toast myToast = Toast.makeText(this, R.string.label_incorrect,
+                    Toast.LENGTH_SHORT);
+            myToast.show();
+            RadioButton radioButton = findViewById((optionIDs.get(selectedOptionPos)));
+            radioButton.setHighlightColor(/*whatever red is*/0);
+            Button myButton = findViewById(R.id.myButton);
+            myButton.setText(R.string.label_skip_button);
+            incorrectCounter++;
         }
     }
 
     /**
-     * changes skip button to next button
+     * changes skip button to submit
      */
     protected void changeMyButton() {
         //id's the button
         Button myButton = findViewById(R.id.myButton);
         //set's the button's text to "Continue"
-        myButton.setText(getString(R.string.nextMyButton));
+        myButton.setText(getString(R.string.label_submit_button));
     }
 
     /**
