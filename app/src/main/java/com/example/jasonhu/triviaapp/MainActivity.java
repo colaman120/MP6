@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
      * if incorrect, toast incorrect, color incorrect, increment counter, change button to skip
      * @param view
      */
-    protected void onSubmit(View view){
+    public void onSubmit(View view){
         //if no selected list item
         if (selectedOptionPos == -1) {
             //increment skip counter
@@ -151,28 +151,28 @@ public class MainActivity extends AppCompatActivity {
     /**
      * change button, set selOption to 0
      */
-    protected void listClick0() {
+    public void listClick0(View view) {
         selectedOptionPos = 0;
         changeMyButton();
     }
     /**
      * change button, set selOption to 1
      */
-    protected void listClick1() {
+    public void listClick1(View view) {
         selectedOptionPos = 1;
         changeMyButton();
     }
     /**
      * change button, set selOption to 2
      */
-    protected void listClick2() {
+    public void listClick2(View view) {
         selectedOptionPos = 2;
         changeMyButton();
     }
     /**
      * change button, set selOption to 3
      */
-    protected void listClick3() {
+    public void listClick3(View view) {
         selectedOptionPos = 3;
         changeMyButton();
     }
