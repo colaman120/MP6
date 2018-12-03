@@ -37,7 +37,10 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The position of the currently selected option in the gui menu
      */
-    private int selectedOptionPos;
+    private int selectedOptionPos = -1;
+    private int skippedCouter;
+    private int correctCounter;
+    private int incorrectCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
             myButton.setHighlightColor(0);
             currentMenuPos++;
         }
+        //reset selected gui option
+        selectedOptionPos = -1;
+        //increment position to next group
         qGroupsPos++;
     }
     /**
@@ -92,10 +98,15 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     protected void onSubmit(View view){
-//        //get selected
-//        Toast myToast = Toast.makeText(this, "Correct!",
-//                Toast.LENGTH_SHORT);
-//        myToast.show();
+        if (selectedOptionPos == -1) {
+            skippedCouter++;
+            nextQ();
+        } else if (selectedOptionPos == correctOptionPos) {
+            Toast myToast = Toast.makeText(this, "Correct!",
+                    Toast.LENGTH_SHORT);
+            myToast.show();
+            Button myButton = findViewById((optionIDs.get(correctOptionPos)));
+        }
     }
 
     /**
@@ -109,31 +120,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * change button, set selOption to 0
+     */
+    protected void listClick0() {
+        selectedOptionPos = 0;
+        changeMyButton();
+    }
+    /**
      * change button, set selOption to 1
      */
     protected void listClick1() {
-        selOption = 1;
+        selectedOptionPos = 1;
         changeMyButton();
     }
     /**
      * change button, set selOption to 2
      */
     protected void listClick2() {
-        selOption = 2;
+        selectedOptionPos = 2;
         changeMyButton();
     }
     /**
      * change button, set selOption to 3
      */
     protected void listClick3() {
-        selOption = 3;
-        changeMyButton();
-    }
-    /**
-     * change button, set selOption to 4
-     */
-    protected void listClick4() {
-        selOption = 4;
+        selectedOptionPos = 3;
         changeMyButton();
     }
 
