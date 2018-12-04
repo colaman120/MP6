@@ -3,17 +3,27 @@ package com.example.jasonhu.triviaapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class MainMenu extends AppCompatActivity {
 
-    Spinner category;
-    Spinner difficulty;
-    ArrayAdapter<CharSequence> adapter;
+    private Spinner category;
+    private Spinner difficulty;
+    private String url = "https://opentdb.com/api.php?amount=10";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,22 +32,23 @@ public class MainMenu extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main_menu);
-
-
     }
 
+    /**
+     * method that is called when button is clicked
+     * @param v ?
+     */
     public void openTrivia(View v){
-        //Starts the set up for the url
-        category = findViewById(R.id.category);
-        difficulty = findViewById(R.id.difficulty);
-        int catNum = getCatNum(category.getSelectedItem().toString());
-        String diff = difficulty.getSelectedItem().toString();
-
-        //JSON request set up
+        urlSetUp();
         startActivity(new Intent(MainMenu.this, MainActivity.class));
     }
 
-    public int getCatNum(String s) {
+    /**
+     * determines the number to put in the api call based on category
+     * @param s the category selected
+     * @return the number associated with the given category
+     */
+    public int getCatNumAPICall(String s) {
         if (s.equals("Any Category")) {
             return 0;
         } else if (s.equals("General Knowledge")) {
@@ -91,4 +102,23 @@ public class MainMenu extends AppCompatActivity {
         }
         return 0;
     }
+
+    public void urlSetUp() {
+        category = findViewById(R.id.category);
+        difficulty = findViewById(R.id.difficulty);
+        int catNum = getCatNumAPICall(category.getSelectedItem().toString());
+        String diff = difficulty.getSelectedItem().toString();
+        //JSON request set up
+        if (catNum != 0) {
+            url += "&category=" + catNum;
+        }
+        if (diff.length() > 0) {
+            url += "&difficulty=" + diff;
+        }
+    }
+
+    public String getUrl() {
+        return url;
+    }
 }
+
