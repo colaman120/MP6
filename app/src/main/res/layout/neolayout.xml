@@ -40,6 +40,21 @@
         android:layout_toEndOf="@+id/DifTextView">
     </TextView>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+        <TextView
+            android:text=""
+            android:id="@+id/DifValTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/DifTextView"
+            android:layout_toEndOf="@+id/DifTextView">
+        </TextView>
+    </RelativeLayout>
+
     <TextView
         android:text=""
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
