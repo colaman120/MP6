@@ -11,7 +11,7 @@
     </TextView>
 
     <TextView
-        android:text=""
+        android:text="-"
         android:id="@+id/CatValTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
     </TextView>
 
     <TextView
-        android:text=""
+        android:text="-"
         android:id="@+id/DifValTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,19 +41,70 @@
     </TextView>
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </RelativeLayout>
+
+    <TextView
+        android:text="Skipped:"
+        android:id="@+id/SCounterTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true">
-        <TextView
-            android:text=""
-            android:id="@+id/DifValTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/DifTextView"
-            android:layout_toEndOf="@+id/DifTextView">
-        </TextView>
-    </RelativeLayout>
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/DifValTextView"
+        android:layout_toEndOf="@+id/DifValTextView">
+    </TextView>
+
+    <TextView
+        android:text="-"
+        android:id="@+id/SCounterValTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/SCounterTextView"
+        android:layout_toEndOf="@+id/SCounterTextView">
+    </TextView>
+
+    <TextView
+        android:text="Correct:"
+        android:id="@+id/CCounterTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/SCounterValTextView"
+        android:layout_toEndOf="@+id/SCounterValTextView">
+    </TextView>
+
+    <TextView
+        android:text="-"
+        android:id="@+id/CCounterValTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/CCounterTextView"
+        android:layout_toEndOf="@+id/CCounterTextView">
+    </TextView>
+
+    <TextView
+        android:text="Incorrect:"
+        android:id="@+id/ICounterTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/CCounterValTextView"
+        android:layout_toEndOf="@+id/CCounterValTextView">
+    </TextView>
+
+    <TextView
+        android:text="-"
+        android:id="@+id/IValCounterTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ICounterTextView"
+        android:layout_toEndOf="@+id/ICounterTextView">
+    </TextView>
 
     <TextView
         android:text=""

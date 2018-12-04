@@ -5,10 +5,10 @@
     <string name="play">Let\'s Play!</string>
     <string name="fin">Final Answer</string>
     <string name="cat">Category: </string>
-    <string name="dif">Difficulty: </string>
+    <string name="dif"> Difficulty: </string>
     <string name="label_submit_button">Submit</string>
     <string name="label_skip_button">Skip</string>
     <string name="label_continue_button">Continue</string>
-    <string name="label_correct">Correct</string>
-    <string name="label_incorrect">Incorrect</string>
+    <string name="label_correct"> Correct</string>
+    <string name="label_incorrect"> Incorrect</string>
 </resources>
