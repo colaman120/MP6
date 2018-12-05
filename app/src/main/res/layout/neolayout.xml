@@ -145,7 +145,7 @@
         android:id="@+id/answerChoices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/myButton">
+        android:layout_above="@+id/ButtonContainer">
 
         <RadioButton
             android:id="@+id/zero"
@@ -180,14 +180,19 @@
             style="@style/ForRadioGroup"/>
     </RadioGroup>
 
-    <Button
-        android:text=""
-        android:id="@+id/myButton"
-        android:onClick="onSubmit"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:id="@+id/ButtonContainer"
         style="@style/ForButton">
-    </Button>
+        <Button
+            android:text=""
+            android:id="@+id/myButton"
+            android:onClick="onSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Button>
+    </RelativeLayout>
 
 </android.widget.RelativeLayout>
