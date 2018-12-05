@@ -76,7 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/CCounterValTextView"
-            android:layout_toEndOf="@+id/CCounterValTextView">
+            android:layout_toEndOf="@+id/CCounterValTextView"
+            android:textColor="@color/colorPrimaryDark">
         </TextView>
 
         <TextView
