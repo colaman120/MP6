@@ -9,4 +9,16 @@
         <!--<item name="android:padding">3dip</item>&lt;!&ndash;Added to enhance relative layout, remove to fix old layout&ndash;&gt;-->
     </style>
 
+    <style name="ForTextViews" parent="AppTheme">
+        <item name="android:padding">4dip</item>
+    </style>
+
+    <style name="ForRadioGroup" parent="AppTheme">
+        <item name="android:padding">4dip</item>
+    </style>
+
+    <style name="ForButton" parent="AppTheme">
+        <item name="android:padding">10dip</item>
+    </style>
+
 </resources>
