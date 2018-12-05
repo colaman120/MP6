@@ -14,7 +14,8 @@
     </style>
 
     <style name="ForRadioGroup" parent="AppTheme">
-        <item name="android:padding">4dip</item>
+        <item name="android:padding">5dip</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="ForButton" parent="AppTheme">
