@@ -81,5 +81,9 @@ public class SimpleLinkedList<E> {
         }
         return null;
     }
+
+    protected Item getStart() {
+        return start;
+    }
 }
 
