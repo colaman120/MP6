@@ -35,6 +35,18 @@ public class MainActivity extends AppCompatActivity {
      * The position of the currently selected option in the gui menu
      */
     private int selectedOptionPos = -1;
+    /**
+     * Number of skipped answers
+     */
+    private int skippedCounter;
+    /**
+     * Number of incorrect answers
+     */
+    private int inCorrectCounter;
+    /**
+     * Number of correct answers
+     */
+    private int correctCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
             radioButton.setHighlightColor(getResources().getColor(R.color.colorRed));
             Button myButton = findViewById(R.id.myButton);
             myButton.setText(R.string.label_skip_button);
-            incrementCounter(R.id.IValCounterTextView);
+            inCorrectCounter++;
+
         }
     }
 
