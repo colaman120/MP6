@@ -9,6 +9,8 @@
     <string name="label_submit_button">Submit</string>
     <string name="label_skip_button">Skip</string>
     <string name="label_continue_button">Continue</string>
+    <string name="label_correct">Correct</string>
+    <string name="label_incorrect">Incorrect</string>
     <string name="header_correct">Correct:</string>
     <string name="header_incorrect">Incorrect:</string>
     <string name="header_skipped">Skipped:</string>
