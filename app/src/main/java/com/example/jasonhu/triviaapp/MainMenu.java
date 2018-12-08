@@ -3,27 +3,17 @@ package com.example.jasonhu.triviaapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-//import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-//import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-//
-//import com.android.volley.Request;
-//import com.android.volley.RequestQueue;
-//import com.android.volley.Response;
-//import com.android.volley.VolleyError;
-//import com.android.volley.toolbox.JsonObjectRequest;
-//
-//import org.json.JSONArray;
-//import org.json.JSONObject;
 
 public class MainMenu extends AppCompatActivity {
 
-    private Spinner category;
-    private Spinner difficulty;
-    private static String url = "https://opentdb.com/api.php?amount=10";
+    /*
+     * URL to be assembled and passed to main activity. Initialized to base with only 1 question
+     */
+    private static String url = "https://opentdb.com/api.php?amount=1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,8 +96,8 @@ public class MainMenu extends AppCompatActivity {
     }
 
     public void urlSetUp() {
-        category = findViewById(R.id.category);
-        difficulty = findViewById(R.id.difficulty);
+        Spinner category = findViewById(R.id.category);
+        Spinner difficulty = findViewById(R.id.difficulty);
         int catNum = getCatNumAPICall(category.getSelectedItem().toString());
         String diff = difficulty.getSelectedItem().toString();
         //JSON request set up
