@@ -3,21 +3,21 @@ package com.example.jasonhu.triviaapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
+//import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
+//
+//import com.android.volley.Request;
+//import com.android.volley.RequestQueue;
+//import com.android.volley.Response;
+//import com.android.volley.VolleyError;
+//import com.android.volley.toolbox.JsonObjectRequest;
+//
+//import org.json.JSONArray;
+//import org.json.JSONObject;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -49,58 +49,60 @@ public class MainMenu extends AppCompatActivity {
      * @return the number associated with the given category
      */
     public int getCatNumAPICall(String s) {
-        if (s.equals("Any Category")) {
-            return 0;
-        } else if (s.equals("General Knowledge")) {
-            return 9;
-        } else if (s.equals("Entertainment: Books")) {
-            return 10;
-        } else if (s.equals("Entertainment: Film")) {
-            return 11;
-        } else if (s.equals("Entertainment: Music")) {
-            return 12;
-        } else if (s.equals("Entertainment: Musicals and Theatres")) {
-            return 13;
-        } else if (s.equals("Entertainment: Television")) {
-            return 14;
-        } else if (s.equals("Entertainment: Video Games")) {
-            return 15;
-        } else if (s.equals("Entertainment: Board Games")) {
-            return 16;
-        } else if (s.equals("Science and Nature")) {
-            return 17;
-        } else if (s.equals("Science: Computers")) {
-            return 18;
-        } else if (s.equals("Science: Mathematics")) {
-            return 19;
-        } else if (s.equals("Mythology")) {
-            return 20;
-        } else if (s.equals("Sports")) {
-            return 21;
-        } else if (s.equals("Geography")) {
-            return 22;
-        } else if (s.equals("History")) {
-            return 23;
-        } else if (s.equals("Politics")) {
-            return 24;
-        } else if (s.equals("Art")) {
-            return 25;
-        } else if (s.equals("Celebrities")) {
-            return 26;
-        } else if (s.equals("Animals")) {
-            return 27;
-        } else if (s.equals("Vehicles")) {
-            return 28;
-        } else if (s.equals("Entertainment: Comics")) {
-            return 29;
-        } else if (s.equals("Science: Gadgets")) {
-            return 30;
-        } else if (s.equals("Entertainment: Anime and Manga")) {
-            return 31;
-        } else if (s.equals("Entertainment: Cartoon and Animation")) {
-            return 32;
+        switch (s) {
+            case "Any Category":
+                return 0;
+            case "General Knowledge":
+                return 9;
+            case "Entertainment: Books":
+                return 10;
+            case "Entertainment: Film":
+                return 11;
+            case "Entertainment: Music":
+                return 12;
+            case "Entertainment: Musicals and Theatres":
+                return 13;
+            case "Entertainment: Television":
+                return 14;
+            case "Entertainment: Video Games":
+                return 15;
+            case "Entertainment: Board Games":
+                return 16;
+            case "Science and Nature":
+                return 17;
+            case "Science: Computers":
+                return 18;
+            case "Science: Mathematics":
+                return 19;
+            case "Mythology":
+                return 20;
+            case "Sports":
+                return 21;
+            case "Geography":
+                return 22;
+            case "History":
+                return 23;
+            case "Politics":
+                return 24;
+            case "Art":
+                return 25;
+            case "Celebrities":
+                return 26;
+            case "Animals":
+                return 27;
+            case "Vehicles":
+                return 28;
+            case "Entertainment: Comics":
+                return 29;
+            case "Science: Gadgets":
+                return 30;
+            case "Entertainment: Anime and Manga":
+                return 31;
+            case "Entertainment: Cartoon and Animation":
+                return 32;
+            default:
+                return 0;
         }
-        return 0;
     }
 
     public void urlSetUp() {

@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         optionIDs.add(R.id.one);
         optionIDs.add(R.id.two);
         optionIDs.add(R.id.three);
+        //setup question
+        nextQ();
     }
 
     protected void nextQ() {
