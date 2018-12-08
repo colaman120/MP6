@@ -2,6 +2,7 @@ package com.example.jasonhu.triviaapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -9,6 +10,17 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.neolayout);
 
         //Construction Zone Below
-
         //initialize the list of menu option IDs
         optionIDs = new ArrayList<>();
         optionIDs.add(R.id.zero);
         optionIDs.add(R.id.one);
         optionIDs.add(R.id.two);
         optionIDs.add(R.id.three);
+        RequestQueue queue = Volley.newRequestQueue(this);
     }
 
     protected void nextQ() {
@@ -184,6 +196,38 @@ public class MainActivity extends AppCompatActivity {
         count++;
         // Display the new value in the text view.
         counterView.setText(count.toString());
+    }
+
+    public void apiCall() {
+        try {
+            //Create new request with get, url of url,
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.GET,
+                    url,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(final JSONObject response) {
+                            try {
+                                JSONArray jsonArray = response.getJSONArray("results");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(final VolleyError error) {
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Parsed returned response string,
+     */
+    public void parseResponse(String response) {
+
     }
 
     /*
