@@ -199,7 +199,8 @@ public class MainActivity extends AppCompatActivity {
         Integer count = Integer.parseInt(counterView.getText().toString());
         count++;
         // Display the new value in the text view.
-        counterView.setText(count.toString());
+        String back = count.toString();
+        counterView.setText(back);
     }
 
     public void apiCall() {
