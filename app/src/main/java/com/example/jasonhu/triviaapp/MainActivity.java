@@ -2,7 +2,7 @@ package com.example.jasonhu.triviaapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -54,7 +54,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Request queue for volley requests
      */
-    RequestQueue queue = Volley.newRequestQueue(this);
+    private RequestQueue queue = Volley.newRequestQueue(this);
+    /**
+     * URL of request
+     */
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.neolayout);
 
         //Construction Zone Below
+        url = MainMenu.getUrl();
         //initialize the list of menu option IDs
         optionIDs = new ArrayList<>();
         optionIDs.add(R.id.zero);
@@ -89,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         for (int optionID : optionIDs) {
             RadioButton myButton = findViewById(optionID);
             if (currentMenuPos == correctOptionPos) {
-                myButton.setText(correctOptionPos);
+                myButton.setText(currentCorrectOption);
             } else {
                 myButton.setText(currentIncorrectOptions[incorrectOptionPos]);
                 incorrectOptionPos++;
@@ -203,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
                     url,
+                    null,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(final JSONObject response) {
@@ -211,7 +217,9 @@ public class MainActivity extends AppCompatActivity {
                                 currentQuestion = question.getString("question");
                                 currentCorrectOption = question.getString("correct_answer");
                                 JSONArray incorrectAnswers = question.getJSONArray("incorrect_answers");
-                                for (int i = 0; i < incorrectAnswers.length(); i++) {
+                                int incorrectAnswersLength = incorrectAnswers.length();
+                                currentIncorrectOptions = new String[incorrectAnswersLength];
+                                for (int i = 0; i < incorrectAnswersLength; i++) {
                                     currentIncorrectOptions[i] = incorrectAnswers.get(i).toString();
                                 }
                             } catch (JSONException e) {
@@ -221,21 +229,14 @@ public class MainActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(final VolleyError error) {
+                    error.printStackTrace();
                 }
             });
-
+            queue.add(jsonObjectRequest);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    /**
-     * Parsed returned response string,
-     */
-    public void parseResponse(String response) {
-
-    }
-
     /*
     TODO: implement api caller & parser
      */

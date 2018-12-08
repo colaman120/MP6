@@ -23,7 +23,7 @@ public class MainMenu extends AppCompatActivity {
 
     private Spinner category;
     private Spinner difficulty;
-    private String url = "https://opentdb.com/api.php?amount=10";
+    private static String url = "https://opentdb.com/api.php?amount=10";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +117,7 @@ public class MainMenu extends AppCompatActivity {
         }
     }
 
-    public String getUrl() {
+    public static String getUrl() {
         return url;
     }
 }
