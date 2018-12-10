@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Request queue for volley requests
      */
-    private RequestQueue queue = Volley.newRequestQueue(this);
+    private RequestQueue queue;
     /**
      * URL of request
      */
@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.neolayout);
 
         //Construction Zone Below
+        queue = Volley.newRequestQueue(this);
         url = MainMenu.getUrl();
         //initialize the list of menu option IDs
         optionIDs = new ArrayList<>();
@@ -86,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
         //Set the question body
         TextView qBody = findViewById(R.id.QBodyTextView);
         qBody.setText(currentQuestion);
+        Toast myToast = Toast.makeText(this, currentQuestion,
+                Toast.LENGTH_SHORT);
+        myToast.show();
         //randomly set the position of the correct option in the menu list
         correctOptionPos = (int) (Math.random()*4.0);
         //initialize the current position of the menu list to iterate and initialize

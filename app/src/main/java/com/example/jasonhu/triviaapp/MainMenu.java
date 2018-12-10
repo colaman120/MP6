@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -29,8 +30,16 @@ public class MainMenu extends AppCompatActivity {
      * @param v ?
      */
     public void openTrivia(View v){
-        urlSetUp();
-        startActivity(new Intent(MainMenu.this, MainActivity.class));
+//        urlSetUp();
+//        startActivity(new Intent(MainMenu.this, MainActivity.class));
+        if (urlSetUp()) {
+            startActivity(new Intent(MainMenu.this, MainActivity.class));
+        }
+        else {
+            Toast myToast = Toast.makeText(this, "ERROR",
+                    Toast.LENGTH_SHORT);
+            myToast.show();
+        }
     }
 
     /**
@@ -95,17 +104,18 @@ public class MainMenu extends AppCompatActivity {
         }
     }
 
-    public void urlSetUp() {
+    public boolean urlSetUp() {
         Spinner category = findViewById(R.id.category);
         Spinner difficulty = findViewById(R.id.difficulty);
         int catNum = getCatNumAPICall(category.getSelectedItem().toString());
         String diff = difficulty.getSelectedItem().toString();
         //JSON request set up
-        if (catNum != 0) {
-            url += "&category=" + catNum;
-        }
-        if (diff.length() > 0) {
+        if (catNum == 0 || diff.length() < 1) {
+            return false;
+        } else  {
             url += "&difficulty=" + diff;
+            url += "&category=" + catNum;
+            return true;
         }
     }
 
