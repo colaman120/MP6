@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 myButton.setText(getString(R.string.label_continue_button));
                 selectedOptionPos = -2;
                 //increment counter
-//                incrementCounter(R.id.CCounterValTextView);
+                incrementCounter(R.id.CCounterValTextView);
             } else {
                 //show incorrect notification
                 Toast myToast = Toast.makeText(this, R.string.label_incorrect,
@@ -121,9 +121,9 @@ public class MainActivity extends AppCompatActivity {
                 //Turn button back into skip button
                 Button myButton = findViewById(R.id.myButton);
                 myButton.setText(R.string.label_skip_button);
-                //reset selectedoptoin so skip will work
+                //reset selectedoption;
                 selectedOptionPos = -1;
-//                incrementCounter(R.id.IValCounterTextView);
+                incrementCounter(R.id.IValCounterTextView);
             }
         }
     }
@@ -170,16 +170,16 @@ public class MainActivity extends AppCompatActivity {
     /**
      * change the specified counter
      */
-//    public void incrementCounter(int id) {
-//        // Get the text view.
-//        TextView counterView = findViewById(id);
-//        // Convert value to a number and increment it.
-//        Integer count = Integer.parseInt(counterView.getText().toString());
-//        count++;
-//        // Display the new value in the text view.
-//        String back = count.toString();
-//        counterView.setText(back);
-//    }
+    public void incrementCounter(int id) {
+        // Get the text view.
+        TextView counterView = findViewById(id);
+        // Convert value to a number and increment it.
+        Integer count = Integer.parseInt(counterView.getText().toString());
+        count++;
+        // Display the new value in the text view.
+        String back = count.toString();
+        counterView.setText(back);
+    }
 
     public void apiCall() {
         final Toast myToast = Toast.makeText(this, "VOLLEY_ERROR",
@@ -198,6 +198,8 @@ public class MainActivity extends AppCompatActivity {
 //                                cat.setText(response.toString() + "PLACE1");
                                 JSONObject q = (response.getJSONArray("results")).getJSONObject(0);
                                 String question = q.getString("question");
+                                Log.d(TAG, question);
+                                question = formatJString(question);
                                 TextView qBody = findViewById(R.id.QLabelTextView);
                                 qBody.setText(question);
 //                                cat.setText(question.getString("question") + "PLACE2");
@@ -230,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 Button myButton = findViewById(R.id.myButton);
                                 myButton.setText(R.string.label_skip_button);
+                                selectedOptionPos = -1;
 //                                Log.d(TAG, ((Integer) incorrectAnswersLength).toString());
                             } catch (JSONException e) {
                                 Log.e(TAG, e.toString());
@@ -252,8 +255,14 @@ public class MainActivity extends AppCompatActivity {
 //        TextView cat = findViewById(R.id.CatValTextView);
 //        cat.setText(currentCorrectOption + "PLACE5");
     }
+
+    public String formatJString(String input) {
+        String back = input.replaceAll("&#039;", "'");
+        back = back.replaceAll("&quot;", "\"");
+        return back;
+    }
+
     /*
-    TODO: implement api caller & parser
      */
 
     /*
