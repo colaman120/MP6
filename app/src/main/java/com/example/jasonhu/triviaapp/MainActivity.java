@@ -69,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
 //        cat.setText(url);
         //initialize the list of menu option IDs
         apiCall();
+//        //set category and diff
+        TextView catVal = findViewById(R.id.CatValTextView);
+        catVal.setText(MainMenu.getCategory() + " ");
+        TextView difVal = findViewById(R.id.DifValTextView);
+        difVal.setText(MainMenu.getDifficulty());
 //        TextView diff = findViewById(R.id.DifValTextView);
 //        diff.setText(currentCorrectOption + "success");
         //setup question
@@ -84,8 +89,10 @@ public class MainActivity extends AppCompatActivity {
     public void onSubmit(View view){
         //if no selected list item
         if (selectedOptionPos < 0) {
-            //increment skip counter
-//            incrementCounter(R.id.SCounterTextView);
+            if (selectedOptionPos == -1) {
+                //increment skip counter
+                incrementCounter(R.id.SCounterValTextView);
+            }
             //move onto next question
             apiCall();
         } else {
@@ -205,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
 //                                cat.setText(question.getString("question") + "PLACE2");
 //                                cat.setText(currentQuestion + "PLACE3");
                                 String correctOption = q.getString("correct_answer");
-                                int correctOptionId = optionIDs.get(0);
+                                int correctOptionId = optionIDs.get((int) Math.round(Math.random() * 3.0));
                                 RadioButton cOption = findViewById(correctOptionId);
                                 cOption.setText(correctOption);
                                 cOption.setTag(R.string.label_correct);

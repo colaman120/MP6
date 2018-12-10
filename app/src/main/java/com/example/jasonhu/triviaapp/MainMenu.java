@@ -15,6 +15,8 @@ public class MainMenu extends AppCompatActivity {
      * URL to be assembled and passed to main activity. Initialized to base with only 1 question
      */
     private static String url = "https://opentdb.com/api.php?amount=1";
+    private static String cat;
+    private static String dif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,8 +109,10 @@ public class MainMenu extends AppCompatActivity {
     public boolean urlSetUp() {
         Spinner category = findViewById(R.id.category);
         Spinner difficulty = findViewById(R.id.difficulty);
-        int catNum = getCatNumAPICall(category.getSelectedItem().toString());
-        String diff = difficulty.getSelectedItem().toString().toLowerCase();
+        cat = category.getSelectedItem().toString();
+        dif = difficulty.getSelectedItem().toString();
+        int catNum = getCatNumAPICall(cat);
+        String diff = dif.toLowerCase();
         //JSON request set up
         //fyi if the catNum == 0 then it should still work. catNum == 0 gives the any category.
         // It just doesn't need to be included in the url
@@ -130,6 +134,14 @@ public class MainMenu extends AppCompatActivity {
 
     public static String getUrl() {
         return url;
+    }
+
+    public static String getCategory() {
+        return cat;
+    }
+
+    public static String getDifficulty() {
+        return dif;
     }
 }
 
