@@ -108,7 +108,7 @@ public class MainMenu extends AppCompatActivity {
         Spinner category = findViewById(R.id.category);
         Spinner difficulty = findViewById(R.id.difficulty);
         int catNum = getCatNumAPICall(category.getSelectedItem().toString());
-        String diff = difficulty.getSelectedItem().toString();
+        String diff = difficulty.getSelectedItem().toString().toLowerCase();
         //JSON request set up
         if (catNum == 0 || diff.length() < 1) {
             return false;

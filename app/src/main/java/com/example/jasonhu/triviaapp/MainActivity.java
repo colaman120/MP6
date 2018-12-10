@@ -3,6 +3,7 @@ package com.example.jasonhu.triviaapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 //import android.util.Log;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -59,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
      * URL of request
      */
     private String url;
+    /**
+     * Tag for logging
+     */
+    private static final String TAG = "MP6:Main";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         //Construction Zone Below
         queue = Volley.newRequestQueue(this);
         url = MainMenu.getUrl();
+        TextView cat = findViewById(R.id.CatValTextView);
+        cat.setText(url);
         //initialize the list of menu option IDs
         optionIDs = new ArrayList<>();
         optionIDs.add(R.id.zero);
@@ -87,9 +94,6 @@ public class MainActivity extends AppCompatActivity {
         //Set the question body
         TextView qBody = findViewById(R.id.QBodyTextView);
         qBody.setText(currentQuestion);
-        Toast myToast = Toast.makeText(this, currentQuestion,
-                Toast.LENGTH_SHORT);
-        myToast.show();
         //randomly set the position of the correct option in the menu list
         correctOptionPos = (int) (Math.random()*4.0);
         //initialize the current position of the menu list to iterate and initialize
@@ -101,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             RadioButton myButton = findViewById(optionID);
             if (currentMenuPos == correctOptionPos) {
                 myButton.setText(currentCorrectOption);
-            } else {
+            } else if (incorrectOptionPos < currentIncorrectOptions.length){
                 myButton.setText(currentIncorrectOptions[incorrectOptionPos]);
                 incorrectOptionPos++;
             }
@@ -210,6 +214,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void apiCall() {
+        final Toast myToast = Toast.makeText(this, "VOLLEY_ERROR",
+                Toast.LENGTH_SHORT);
         try {
             //Create new request with get, url of url,
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -220,11 +226,14 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(final JSONObject response) {
                             try {
-                                JSONObject question = response.getJSONArray("results").getJSONObject(0);
+//                                TextView diff = findViewById(R.id.DifValTextView);
+//                                diff.setText(response.toString());
+                                JSONObject question = (response.getJSONArray("results")).getJSONObject(0);
                                 currentQuestion = question.getString("question");
                                 currentCorrectOption = question.getString("correct_answer");
                                 JSONArray incorrectAnswers = question.getJSONArray("incorrect_answers");
                                 int incorrectAnswersLength = incorrectAnswers.length();
+                                Log.d(TAG, ((Integer) incorrectAnswersLength).toString());
                                 currentIncorrectOptions = new String[incorrectAnswersLength];
                                 for (int i = 0; i < incorrectAnswersLength; i++) {
                                     currentIncorrectOptions[i] = incorrectAnswers.get(i).toString();
@@ -236,11 +245,13 @@ public class MainActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(final VolleyError error) {
-                    error.printStackTrace();
+                    myToast.show();
+                    Log.w(TAG, error.toString());
                 }
             });
             queue.add(jsonObjectRequest);
         } catch (Exception e) {
+            Log.w(TAG, e.toString());
             e.printStackTrace();
         }
     }
