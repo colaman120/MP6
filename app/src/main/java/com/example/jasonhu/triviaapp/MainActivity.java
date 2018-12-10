@@ -33,17 +33,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private List<Integer> optionIDs;
     /**
-     * current question
+     * Current Question
      */
-    private String currentQuestion;
-    /**
-     * current Correct Option
-     */
-    private String currentCorrectOption;
-    /**
-     * current inorrect Option
-     */
-    private String[] currentIncorrectOptions;
+    private static QGroup currentQGroup;
     /**
      * The position of the correct option in the gui menu
      */
@@ -76,14 +68,17 @@ public class MainActivity extends AppCompatActivity {
         //Construction Zone Below
         queue = Volley.newRequestQueue(this);
         url = MainMenu.getUrl();
-        TextView cat = findViewById(R.id.CatValTextView);
-        cat.setText(url);
+//        TextView cat = findViewById(R.id.CatValTextView);
+//        cat.setText(url);
         //initialize the list of menu option IDs
         optionIDs = new ArrayList<>();
         optionIDs.add(R.id.zero);
         optionIDs.add(R.id.one);
         optionIDs.add(R.id.two);
         optionIDs.add(R.id.three);
+        apiCall();
+//        TextView diff = findViewById(R.id.DifValTextView);
+//        diff.setText(currentCorrectOption + "success");
         //setup question
         nextQ();
     }
@@ -93,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
         apiCall();
         //Set the question body
         TextView qBody = findViewById(R.id.QBodyTextView);
-        qBody.setText(currentQuestion);
+        qBody.setText(currentQGroup.getQuestion());
+        TextView diff = findViewById(R.id.DifValTextView);
+        diff.setText(currentQGroup.getQuestion() + "success2");
         //randomly set the position of the correct option in the menu list
         correctOptionPos = (int) (Math.random()*4.0);
         //initialize the current position of the menu list to iterate and initialize
@@ -101,18 +98,18 @@ public class MainActivity extends AppCompatActivity {
         //initialize the current position of the incorrect options list
         int incorrectOptionPos = 0;
         //for every option in optionIDs:
-        for (int optionID : optionIDs) {
-            RadioButton myButton = findViewById(optionID);
-            if (currentMenuPos == correctOptionPos) {
-                myButton.setText(currentCorrectOption);
-            } else if (incorrectOptionPos < currentIncorrectOptions.length){
-                myButton.setText(currentIncorrectOptions[incorrectOptionPos]);
-                incorrectOptionPos++;
-            }
-            myButton.setEnabled(true);
-            myButton.setHighlightColor(0);
-            currentMenuPos++;
-        }
+//        for (int optionID : optionIDs) {
+//            RadioButton myButton = findViewById(optionID);
+//            if (currentMenuPos == correctOptionPos) {
+//                myButton.setText(currentCorrectOption);
+//            } else if (incorrectOptionPos < currentIncorrectOptions.length){
+//                myButton.setText(currentIncorrectOptions[incorrectOptionPos]);
+//                incorrectOptionPos++;
+//            }
+//            myButton.setEnabled(true);
+//            myButton.setHighlightColor(0);
+//            currentMenuPos++;
+//        }
         //reset selected gui option
         selectedOptionPos = -1;
     }
@@ -226,34 +223,41 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(final JSONObject response) {
                             try {
-//                                TextView diff = findViewById(R.id.DifValTextView);
-//                                diff.setText(response.toString());
-                                JSONObject question = (response.getJSONArray("results")).getJSONObject(0);
-                                currentQuestion = question.getString("question");
-                                currentCorrectOption = question.getString("correct_answer");
-                                JSONArray incorrectAnswers = question.getJSONArray("incorrect_answers");
-                                int incorrectAnswersLength = incorrectAnswers.length();
-                                Log.d(TAG, ((Integer) incorrectAnswersLength).toString());
-                                currentIncorrectOptions = new String[incorrectAnswersLength];
-                                for (int i = 0; i < incorrectAnswersLength; i++) {
-                                    currentIncorrectOptions[i] = incorrectAnswers.get(i).toString();
+//                                TextView cat = findViewById(R.id.CatValTextView);
+//                                cat.setText(response.toString() + "PLACE1");
+                                JSONObject q = (response.getJSONArray("results")).getJSONObject(0);
+                                String question = q.getString("question");
+//                                cat.setText(question.getString("question") + "PLACE2");
+//                                cat.setText(currentQuestion + "PLACE3");
+                                String correctOption = q.getString("correct_answer");
+//                                cat.setText(currentCorrectOption + "PLACE4");
+                                JSONArray incorrectAnswers = q.getJSONArray("incorrect_answers");
+//                                Log.d(TAG, ((Integer) incorrectAnswersLength).toString());
+                                List<String> incorrectOptions = new ArrayList<>();
+                                for (int i = 0; i < incorrectAnswers.length(); i++) {
+                                    incorrectOptions.add(incorrectAnswers.get(i).toString());
                                 }
+                                currentQGroup = new QGroup(question, correctOption, incorrectOptions);
                             } catch (JSONException e) {
+                                Log.e(TAG, e.toString());
                                 e.printStackTrace();
                             }
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(final VolleyError error) {
+                    Log.e(TAG, error.toString());
+                    error.printStackTrace();
                     myToast.show();
-                    Log.w(TAG, error.toString());
                 }
             });
             queue.add(jsonObjectRequest);
         } catch (Exception e) {
-            Log.w(TAG, e.toString());
+            Log.e(TAG, e.toString());
             e.printStackTrace();
         }
+//        TextView cat = findViewById(R.id.CatValTextView);
+//        cat.setText(currentCorrectOption + "PLACE5");
     }
     /*
     TODO: implement api caller & parser
