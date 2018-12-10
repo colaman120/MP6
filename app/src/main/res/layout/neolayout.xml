@@ -153,6 +153,7 @@
             android:layout_height="wrap_content"
             android:onClick="listClick0"
             android:text=""
+            android:tag="@string/label_incorrect"
             style="@style/ForRadioGroup"/>
 
         <RadioButton
@@ -161,6 +162,7 @@
             android:layout_height="wrap_content"
             android:onClick="listClick1"
             android:text=""
+            android:tag="@string/label_incorrect"
             style="@style/ForRadioGroup"/>
 
         <RadioButton
@@ -169,6 +171,7 @@
             android:layout_height="wrap_content"
             android:onClick="listClick2"
             android:text=""
+            android:tag="@string/label_incorrect"
             style="@style/ForRadioGroup"/>
 
         <RadioButton
@@ -177,6 +180,7 @@
             android:layout_height="wrap_content"
             android:onClick="listClick3"
             android:text=""
+            android:tag="@string/label_incorrect"
             style="@style/ForRadioGroup"/>
     </RadioGroup>
 

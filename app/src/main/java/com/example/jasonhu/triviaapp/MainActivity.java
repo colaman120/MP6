@@ -33,17 +33,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private List<Integer> optionIDs;
     /**
-     * Current Question
+     *
      */
-    private static QGroup currentQGroup;
-    /**
-     * The position of the correct option in the gui menu
-     */
-    private int correctOptionPos;
-    /**
-     * The position of the currently selected option in the gui menu
-     */
-    private int selectedOptionPos = -1;
+    private int selectedOptionPos;
     /**
      * Request queue for volley requests
      */
@@ -68,51 +60,20 @@ public class MainActivity extends AppCompatActivity {
         //Construction Zone Below
         queue = Volley.newRequestQueue(this);
         url = MainMenu.getUrl();
-//        TextView cat = findViewById(R.id.CatValTextView);
-//        cat.setText(url);
-        //initialize the list of menu option IDs
-        optionIDs = new ArrayList<>();
         optionIDs.add(R.id.zero);
         optionIDs.add(R.id.one);
         optionIDs.add(R.id.two);
         optionIDs.add(R.id.three);
+//        TextView cat = findViewById(R.id.CatValTextView);
+//        cat.setText(url);
+        //initialize the list of menu option IDs
         apiCall();
 //        TextView diff = findViewById(R.id.DifValTextView);
 //        diff.setText(currentCorrectOption + "success");
         //setup question
-        nextQ();
+        apiCall();
     }
 
-    protected void nextQ() {
-        //get new question
-        apiCall();
-        //Set the question body
-        TextView qBody = findViewById(R.id.QBodyTextView);
-        qBody.setText(currentQGroup.getQuestion());
-        TextView diff = findViewById(R.id.DifValTextView);
-        diff.setText(currentQGroup.getQuestion() + "success2");
-        //randomly set the position of the correct option in the menu list
-        correctOptionPos = (int) (Math.random()*4.0);
-        //initialize the current position of the menu list to iterate and initialize
-        int currentMenuPos = 0;
-        //initialize the current position of the incorrect options list
-        int incorrectOptionPos = 0;
-        //for every option in optionIDs:
-//        for (int optionID : optionIDs) {
-//            RadioButton myButton = findViewById(optionID);
-//            if (currentMenuPos == correctOptionPos) {
-//                myButton.setText(currentCorrectOption);
-//            } else if (incorrectOptionPos < currentIncorrectOptions.length){
-//                myButton.setText(currentIncorrectOptions[incorrectOptionPos]);
-//                incorrectOptionPos++;
-//            }
-//            myButton.setEnabled(true);
-//            myButton.setHighlightColor(0);
-//            currentMenuPos++;
-//        }
-        //reset selected gui option
-        selectedOptionPos = -1;
-    }
     /**
      * if none selected, increment skip, call nextQ
      * if selected is correct, toast correct, color correct, increment correctcounter, change button
@@ -126,34 +87,36 @@ public class MainActivity extends AppCompatActivity {
             //increment skip counter
             incrementCounter(R.id.SCounterTextView);
             //move onto next question
-            nextQ();
-        } else if (selectedOptionPos == correctOptionPos) {
-            Toast myToast = Toast.makeText(this, R.string.label_correct,
-                    Toast.LENGTH_SHORT);
-            myToast.show();
-            int currentMenuPos = 0;
-            for (int optionID : optionIDs) {
-                RadioButton radioButton = findViewById(optionID);
-                if (currentMenuPos == correctOptionPos) {
-                    radioButton.setHighlightColor(getResources().getColor(R.color.colorGreen));
-                }
-                radioButton.setEnabled(false);
-                currentMenuPos++;
-            }
-            //id's submit button
-            Button myButton = findViewById(R.id.myButton);
-            //set's the button's text to "Continue"
-            myButton.setText(getString(R.string.label_continue_button));
-            incrementCounter(R.id.CCounterValTextView);
+            apiCall();
         } else {
-            Toast myToast = Toast.makeText(this, R.string.label_incorrect,
-                    Toast.LENGTH_SHORT);
-            myToast.show();
-            RadioButton radioButton = findViewById((optionIDs.get(selectedOptionPos)));
-            radioButton.setHighlightColor(getResources().getColor(R.color.colorRed));
-            Button myButton = findViewById(R.id.myButton);
-            myButton.setText(R.string.label_skip_button);
-            incrementCounter(R.id.IValCounterTextView);
+            int currentID = optionIDs.get(selectedOptionPos);
+            RadioButton selectedButton = findViewById(optionIDs.get(selectedOptionPos));
+            if (selectedButton.getTag().equals(R.string.label_correct)) {
+                Toast myToast = Toast.makeText(this, R.string.label_correct,
+                        Toast.LENGTH_SHORT);
+                myToast.show();
+                for (int optionID : optionIDs) {
+                    RadioButton everyButton = findViewById(optionID);
+                    if (optionID == currentID) {
+                        everyButton.setHighlightColor(getResources().getColor(R.color.colorGreen));
+                    }
+                    everyButton.setEnabled(false);
+                }
+                //id's submit button
+                Button myButton = findViewById(R.id.myButton);
+                //set's the button's text to "Continue"
+                myButton.setText(getString(R.string.label_continue_button));
+                incrementCounter(R.id.CCounterValTextView);
+            } else {
+                Toast myToast = Toast.makeText(this, R.string.label_incorrect,
+                        Toast.LENGTH_SHORT);
+                myToast.show();
+                RadioButton radioButton = findViewById((optionIDs.get(selectedOptionPos)));
+                radioButton.setHighlightColor(getResources().getColor(R.color.colorRed));
+                Button myButton = findViewById(R.id.myButton);
+                myButton.setText(R.string.label_skip_button);
+                incrementCounter(R.id.IValCounterTextView);
+            }
         }
     }
 
@@ -227,17 +190,28 @@ public class MainActivity extends AppCompatActivity {
 //                                cat.setText(response.toString() + "PLACE1");
                                 JSONObject q = (response.getJSONArray("results")).getJSONObject(0);
                                 String question = q.getString("question");
+                                TextView qBody = findViewById(R.id.QLabelTextView);
+                                qBody.setText(question);
 //                                cat.setText(question.getString("question") + "PLACE2");
 //                                cat.setText(currentQuestion + "PLACE3");
                                 String correctOption = q.getString("correct_answer");
+                                int correctOptionId = optionIDs.get(0);
+                                RadioButton cOption = findViewById(correctOptionId);
+                                cOption.setText(correctOption);
+                                cOption.setTag(R.string.label_correct);
 //                                cat.setText(currentCorrectOption + "PLACE4");
                                 JSONArray incorrectAnswers = q.getJSONArray("incorrect_answers");
-//                                Log.d(TAG, ((Integer) incorrectAnswersLength).toString());
-                                List<String> incorrectOptions = new ArrayList<>();
-                                for (int i = 0; i < incorrectAnswers.length(); i++) {
-                                    incorrectOptions.add(incorrectAnswers.get(i).toString());
+                                RadioButton iOption;
+                                int incorrectAnswersPos = 0;
+                                for (int optionID : optionIDs) {
+                                    if (optionID != correctOptionId) {
+                                        iOption = findViewById(optionID);
+                                        iOption.setText(incorrectAnswers.get(incorrectAnswersPos).toString());
+                                        cOption.setTag(R.string.label_incorrect);
+                                        incorrectAnswersPos++;
+                                    }
                                 }
-                                currentQGroup = new QGroup(question, correctOption, incorrectOptions);
+//                                Log.d(TAG, ((Integer) incorrectAnswersLength).toString());
                             } catch (JSONException e) {
                                 Log.e(TAG, e.toString());
                                 e.printStackTrace();
