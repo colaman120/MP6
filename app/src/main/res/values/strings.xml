@@ -14,4 +14,5 @@
     <string name="header_correct">Correct:</string>
     <string name="header_incorrect">Incorrect:</string>
     <string name="header_skipped">Skipped:</string>
+    <string name="label_placeholder">-</string>
 </resources>

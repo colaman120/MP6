@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         //Construction Zone Below
         queue = Volley.newRequestQueue(this);
         url = MainMenu.getUrl();
+        optionIDs = new ArrayList<>();
         optionIDs.add(R.id.zero);
         optionIDs.add(R.id.one);
         optionIDs.add(R.id.two);
@@ -71,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
 //        TextView diff = findViewById(R.id.DifValTextView);
 //        diff.setText(currentCorrectOption + "success");
         //setup question
-        apiCall();
     }
 
     /**
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         //if no selected list item
         if (selectedOptionPos == -1) {
             //increment skip counter
-            incrementCounter(R.id.SCounterTextView);
+//            incrementCounter(R.id.SCounterTextView);
             //move onto next question
             apiCall();
         } else {
@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
                 Button myButton = findViewById(R.id.myButton);
                 //set's the button's text to "Continue"
                 myButton.setText(getString(R.string.label_continue_button));
-                incrementCounter(R.id.CCounterValTextView);
+                //increment counter
+//                incrementCounter(R.id.CCounterValTextView);
             } else {
                 Toast myToast = Toast.makeText(this, R.string.label_incorrect,
                         Toast.LENGTH_SHORT);
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 radioButton.setHighlightColor(getResources().getColor(R.color.colorRed));
                 Button myButton = findViewById(R.id.myButton);
                 myButton.setText(R.string.label_skip_button);
-                incrementCounter(R.id.IValCounterTextView);
+//                incrementCounter(R.id.IValCounterTextView);
             }
         }
     }
@@ -206,9 +207,13 @@ public class MainActivity extends AppCompatActivity {
                                 for (int optionID : optionIDs) {
                                     if (optionID != correctOptionId) {
                                         iOption = findViewById(optionID);
-                                        iOption.setText(incorrectAnswers.get(incorrectAnswersPos).toString());
+                                        if (incorrectAnswersPos < incorrectAnswers.length()) {
+                                            iOption.setText(incorrectAnswers.get(incorrectAnswersPos).toString());
+                                            incorrectAnswersPos++;
+                                        } else {
+                                            iOption.setText(R.string.label_placeholder);
+                                        }
                                         cOption.setTag(R.string.label_incorrect);
-                                        incorrectAnswersPos++;
                                     }
                                 }
 //                                Log.d(TAG, ((Integer) incorrectAnswersLength).toString());
