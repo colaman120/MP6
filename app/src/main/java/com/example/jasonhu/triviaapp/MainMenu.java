@@ -110,11 +110,20 @@ public class MainMenu extends AppCompatActivity {
         int catNum = getCatNumAPICall(category.getSelectedItem().toString());
         String diff = difficulty.getSelectedItem().toString().toLowerCase();
         //JSON request set up
-        if (catNum == 0 || diff.length() < 1) {
+        //fyi if the catNum == 0 then it should still work. catNum == 0 gives the any category.
+        // It just doesn't need to be included in the url
+        //also, if diff == any difficulty, it shouldn't add to the url
+        if (diff.length() < 1) {
             return false;
         } else  {
-            url += "&difficulty=" + diff;
-            url += "&category=" + catNum;
+            if (!(diff.equals("any difficulty"))) {
+                url += "&difficulty=" + diff;
+            }
+            if (catNum == 0) {
+                return true;
+            } else {
+                url += "&category=" + catNum;
+            }
             return true;
         }
     }
