@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onSubmit(View view){
         //if no selected list item
-        if (selectedOptionPos == -1) {
+        if (selectedOptionPos < 0) {
             //increment skip counter
 //            incrementCounter(R.id.SCounterTextView);
             //move onto next question
@@ -106,16 +106,23 @@ public class MainActivity extends AppCompatActivity {
                 Button myButton = findViewById(R.id.myButton);
                 //set's the button's text to "Continue"
                 myButton.setText(getString(R.string.label_continue_button));
+                selectedOptionPos = -2;
                 //increment counter
 //                incrementCounter(R.id.CCounterValTextView);
             } else {
+                //show incorrect notification
                 Toast myToast = Toast.makeText(this, R.string.label_incorrect,
                         Toast.LENGTH_SHORT);
                 myToast.show();
+                //disable incorrect option
                 RadioButton radioButton = findViewById((optionIDs.get(selectedOptionPos)));
                 radioButton.setHighlightColor(getResources().getColor(R.color.colorRed));
+                radioButton.setEnabled(false);
+                //Turn button back into skip button
                 Button myButton = findViewById(R.id.myButton);
                 myButton.setText(R.string.label_skip_button);
+                //reset selectedoptoin so skip will work
+                selectedOptionPos = -1;
 //                incrementCounter(R.id.IValCounterTextView);
             }
         }
@@ -163,16 +170,16 @@ public class MainActivity extends AppCompatActivity {
     /**
      * change the specified counter
      */
-    public void incrementCounter(int id) {
-        // Get the text view.
-        TextView counterView = findViewById(id);
-        // Convert value to a number and increment it.
-        Integer count = Integer.parseInt(counterView.getText().toString());
-        count++;
-        // Display the new value in the text view.
-        String back = count.toString();
-        counterView.setText(back);
-    }
+//    public void incrementCounter(int id) {
+//        // Get the text view.
+//        TextView counterView = findViewById(id);
+//        // Convert value to a number and increment it.
+//        Integer count = Integer.parseInt(counterView.getText().toString());
+//        count++;
+//        // Display the new value in the text view.
+//        String back = count.toString();
+//        counterView.setText(back);
+//    }
 
     public void apiCall() {
         final Toast myToast = Toast.makeText(this, "VOLLEY_ERROR",
@@ -200,6 +207,8 @@ public class MainActivity extends AppCompatActivity {
                                 RadioButton cOption = findViewById(correctOptionId);
                                 cOption.setText(correctOption);
                                 cOption.setTag(R.string.label_correct);
+                                cOption.setEnabled(true);
+                                cOption.setSelected(false);
 //                                cat.setText(currentCorrectOption + "PLACE4");
                                 JSONArray incorrectAnswers = q.getJSONArray("incorrect_answers");
                                 RadioButton iOption;
@@ -210,12 +219,17 @@ public class MainActivity extends AppCompatActivity {
                                         if (incorrectAnswersPos < incorrectAnswers.length()) {
                                             iOption.setText(incorrectAnswers.get(incorrectAnswersPos).toString());
                                             incorrectAnswersPos++;
+                                            iOption.setEnabled(true);
                                         } else {
-                                            iOption.setText(R.string.label_placeholder);
+                                            iOption.setText("");
+                                            iOption.setEnabled(false);
                                         }
-                                        cOption.setTag(R.string.label_incorrect);
+                                        iOption.setTag(R.string.label_incorrect);
+                                        iOption.setSelected(false);
                                     }
                                 }
+                                Button myButton = findViewById(R.id.myButton);
+                                myButton.setText(R.string.label_skip_button);
 //                                Log.d(TAG, ((Integer) incorrectAnswersLength).toString());
                             } catch (JSONException e) {
                                 Log.e(TAG, e.toString());
